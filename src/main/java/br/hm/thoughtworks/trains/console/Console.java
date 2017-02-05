@@ -22,6 +22,8 @@ public class Console {
         this.digraph = digraph;
         commandHandlers.add(new ExitCommandHandler());
         commandHandlers.add(new DistanceRouteCommandHandler(digraph));
+        commandHandlers.add(new ShortestRouteCommandHandler(digraph));
+
     }
 
 
