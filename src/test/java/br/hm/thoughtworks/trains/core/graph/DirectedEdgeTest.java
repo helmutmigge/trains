@@ -1,7 +1,5 @@
 package br.hm.thoughtworks.trains.core.graph;
 
-import br.hm.thoughtworks.trains.core.graph.DirectedEdge;
-import br.hm.thoughtworks.trains.core.graph.Vertex;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,9 +8,8 @@ import org.junit.Test;
  */
 public class DirectedEdgeTest {
 
-    Vertex vertexA = new Vertex("A");
-    Vertex vertexB = new Vertex("B");
-    DirectedEdge directedEdge = new DirectedEdge("A", "B", 5);
+    private Vertex vertexB = new Vertex("B");
+    private DirectedEdge directedEdge = new DirectedEdge("A", "B", 5);
 
 
     @Test

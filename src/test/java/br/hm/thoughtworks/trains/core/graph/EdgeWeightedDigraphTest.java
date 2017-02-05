@@ -14,14 +14,13 @@ import java.util.stream.Stream;
  */
 public class EdgeWeightedDigraphTest {
 
-    EdgeWeightedDigraph graph;
+    private EdgeWeightedDigraph graph;
 
     @Before
     public void setUp() throws ParseException {
         graph = new EdgeWeightedDigraph();
         In in = new In("input.txt");
         String[] inputEdges = in.readAll().split(",");
-        DirectedEdgeFormat directedEdgeFormat = new DirectedEdgeFormat();
         for (String inputEdge : inputEdges) {
             DirectedEdge directedEdge = DirectedEdge.parser(inputEdge.trim());
             graph.addEdge(directedEdge);
@@ -40,7 +39,7 @@ public class EdgeWeightedDigraphTest {
         Stream<DirectedEdge> stream = graph.adjacencyForVertex(vertex);
         String initalA = stream
                 .filter(edge -> edge.from().getName().equals("A"))
-                .map(edge -> edge.toString())
+                .map(DirectedEdge::toString)
                 .collect(Collectors.joining(","));
         Assert.assertEquals("AB5,AD5,AE7", initalA);
     }

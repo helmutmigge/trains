@@ -10,16 +10,16 @@ public class DirectedEdgeFormatTest {
 
     @Test
     public void format() throws Exception {
-        DirectedEdge directedEdge = new DirectedEdge("A","B",5);
-        Assert.assertEquals("AB5",new DirectedEdgeFormat().format(directedEdge));
+        DirectedEdge directedEdge = new DirectedEdge("A", "B", 5);
+        Assert.assertEquals("AB5", new DirectedEdgeFormat().format(directedEdge));
     }
 
     @Test
     public void parseObject() throws Exception {
-        String  inputEdge ="AB5";
+        String inputEdge = "AB5";
         DirectedEdge directedEdge = (DirectedEdge) new DirectedEdgeFormat().parseObject(inputEdge);
 
-        Assert.assertEquals("A",directedEdge.from().getName());
+        Assert.assertEquals("A", directedEdge.from().getName());
         Assert.assertEquals("B", directedEdge.to().getName());
         Assert.assertEquals(5, directedEdge.getWeight());
     }
