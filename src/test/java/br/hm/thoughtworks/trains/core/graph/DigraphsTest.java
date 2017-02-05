@@ -78,4 +78,20 @@ public class DigraphsTest {
         Digraphs.weightedPath(graph, "A-E-D");
     }
 
+    /**
+     * The length of the shortest route (in terms of distance to travel) from A to C.
+     */
+    @Test
+    public void shortestRouteAtoC(){
+        Assert.assertEquals(9,Digraphs.weightedShortestPath(graph,new Vertex("A"),new Vertex("C")));
+    }
+
+    /**
+     * The length of the shortest route (in terms of distance to travel) from B to B.
+     */
+    @Test
+    public void shortestRouteBtoB(){
+        Assert.assertEquals(9,Digraphs.weightedShortestPath(graph,new Vertex("B"),new Vertex("B")));
+    }
+
 }

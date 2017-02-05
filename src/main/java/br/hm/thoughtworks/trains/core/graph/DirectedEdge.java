@@ -9,7 +9,7 @@ import java.text.ParseException;
  */
 public class DirectedEdge implements Comparable<DirectedEdge> {
 
-    private final int weight;
+    private final long weight;
     private final Vertex from;
     private final Vertex to;
 
@@ -36,7 +36,7 @@ public class DirectedEdge implements Comparable<DirectedEdge> {
      * @param weight        peso dessa aresta
      * @throws NullPointerException SE {@code from} ou {@code to} for nulo
      */
-    public DirectedEdge(Vertex from, Vertex to, int weight) {
+    public DirectedEdge(Vertex from, Vertex to, long weight) {
         if (from == null || to == null){
             throw new NullPointerException("vertex is null");
         }
@@ -84,7 +84,7 @@ public class DirectedEdge implements Comparable<DirectedEdge> {
 
     @Override
     public int hashCode() {
-        int result = getWeight();
+        int result = new Long(getWeight()).hashCode();
         result = 31 * result + from.hashCode();
         result = 31 * result + to.hashCode();
         return result;
@@ -95,7 +95,7 @@ public class DirectedEdge implements Comparable<DirectedEdge> {
      */
     @Override
     public int compareTo(DirectedEdge that) {
-        return Integer.compare(this.getWeight(), that.getWeight());
+        return Long.compare(this.getWeight(), that.getWeight());
     }
 
 
@@ -103,7 +103,7 @@ public class DirectedEdge implements Comparable<DirectedEdge> {
     /**
      * @return o peso dessa aresta
      */
-    public int getWeight() {
+    public long getWeight() {
         return weight;
     }
 

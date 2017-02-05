@@ -56,7 +56,7 @@ public class EdgeWeightedDigraph {
 
 
     /**
-     * Returns numero de arestas que sai do vvertice diretamente {@code vertex}.
+     * Returns numero de arestas que sai do vertice diretamente {@code vertex}.
      *
      * @param  vertex  vertice
      * @return grau do que o vertice inicia  {@code vertex}

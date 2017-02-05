@@ -40,7 +40,21 @@ public class VertexPath {
         return path.stream();
     }
 
+    /**
+     * Representado em formato texto dessa classe {@link VertexPath}
+     * @return em formato texto dessa classe
+     */
+    @Override
+    public String toString() {
+        return new VertexPathFormat().format(this);
+    }
 
+    /**
+     * instancia um {@link VertexPath} apartir de uma string com o formato padrão exemplo: A-B-C
+     * @param source texto com formato padrão
+     * @return instancia um {@link VertexPath} apartir de uma string com o formato padrão
+     * @throws ParseException Caso {@code source} não esteja no formato padrão
+     */
     public static VertexPath parseVertexPath(String source) throws ParseException {
         return (VertexPath) new VertexPathFormat().parseObject(source);
     }

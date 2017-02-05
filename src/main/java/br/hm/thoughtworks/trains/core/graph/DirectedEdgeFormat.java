@@ -43,11 +43,11 @@ public class DirectedEdgeFormat extends Format {
                                FieldPosition fieldPosition) {
         Vertex from = directedEdge.from();
         Vertex to = directedEdge.to();
-        int weight = directedEdge.getWeight();
+        long weight = directedEdge.getWeight();
 
         toAppendTo.append(from);
         toAppendTo.append(to);
-        toAppendTo.append(Integer.toString(weight));
+        toAppendTo.append(Long.toString(weight));
         return toAppendTo;
     }
 
