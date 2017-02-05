@@ -12,43 +12,49 @@ import java.util.stream.Stream;
 /**
  * Created by helmutmigge on 04/02/2017.
  */
-public class EdgeWeightedGraphTest {
+public class EdgeWeightedDigraphTest {
 
-    EdgeWeightedGraph graph;
+    EdgeWeightedDigraph graph;
 
     @Before
     public void setUp() throws ParseException {
-        graph = new EdgeWeightedGraph();
+        graph = new EdgeWeightedDigraph();
         In in = new In("input.txt");
         String[] inputEdges = in.readAll().split(",");
-        EdgeFormat edgeFormat = new EdgeFormat();
+        DirectedEdgeFormat directedEdgeFormat = new DirectedEdgeFormat();
         for (String inputEdge : inputEdges) {
-            Edge edge = Edge.parser(inputEdge.trim());
-            graph.addEdge(edge);
+            DirectedEdge directedEdge = DirectedEdge.parser(inputEdge.trim());
+            graph.addEdge(directedEdge);
         }
     }
 
     @Test
     public void addEdge() throws Exception {
-        graph.addEdge(new Edge("D", "A", 13));
+        graph.addEdge(new DirectedEdge("D", "A", 13));
         Assert.assertTrue("Not found vertex DA13", graph.toString().contains("DA13"));
     }
 
     @Test
-    public void incidentOnVertex() throws Exception {
+    public void adjacencyForVertex() throws Exception {
         Vertex vertex = new Vertex("A");
-        Stream<Edge> stream = graph.incidentOnVertex(vertex);
+        Stream<DirectedEdge> stream = graph.adjacencyForVertex(vertex);
         String initalA = stream
-                .filter(edge -> edge.either().getName().equals("A"))
+                .filter(edge -> edge.from().getName().equals("A"))
                 .map(edge -> edge.toString())
                 .collect(Collectors.joining(","));
         Assert.assertEquals("AB5,AD5,AE7", initalA);
     }
 
     @Test
-    public void degree() throws Exception {
+    public void outdegree() throws Exception {
         Vertex vertex = new Vertex("A");
-        Assert.assertEquals(3, graph.degree(vertex));
+        Assert.assertEquals(3, graph.outdegree(vertex));
+    }
+
+    @Test
+    public void indegree() throws Exception {
+        Vertex vertex = new Vertex("A");
+        Assert.assertEquals(0, graph.indegree(vertex));
     }
 
     @Test
