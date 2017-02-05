@@ -12,6 +12,10 @@ public class Digraphs {
         VertexPath vertexPath = VertexPath.parseVertexPath(path);
         return new WeightedPaths(digraph, vertexPath).weight();
     }
+    public static long weightedPath(EdgeWeightedDigraph digraph,VertexPath vertexPath) throws  NoSuchElementException {
+        return new WeightedPaths(digraph, vertexPath).weight();
+    }
+
 
     public static long weightedShortestPath(EdgeWeightedDigraph digraph, Vertex from, Vertex to) throws NoSuchElementException{
         return new Dijkstra(digraph,from).weightedPathTo(to);

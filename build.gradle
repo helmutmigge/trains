@@ -2,11 +2,23 @@ group 'br.hm.thoughtworks'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'application'
 
 sourceCompatibility = 1.8
 
+mainClassName = "br.hm.thoughtworks.trains.Main"
+
 repositories {
     mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'br.hm.thoughtworks.trains.Main'
+        )
+    }
 }
 
 dependencies {
