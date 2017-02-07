@@ -88,7 +88,7 @@ public class EdgeWeightedDigraph {
      * @return todas as arestas dentro desse grafo
      */
     public Stream<DirectedEdge> edges() {
-        List<DirectedEdge> list = new LinkedList<DirectedEdge>();
+        List<DirectedEdge> list = new LinkedList<>();
         for (Vertex vertex: adjacency.keySet()) {
             for (DirectedEdge e : adjacency.get(vertex)) {
                 list.add(e);
@@ -105,7 +105,7 @@ public class EdgeWeightedDigraph {
      */
     public String toString() {
         return edges()
-                .map(edge -> edge.toString())
+                .map(DirectedEdge::toString)
                 .collect(Collectors.joining(", "));
     }
 

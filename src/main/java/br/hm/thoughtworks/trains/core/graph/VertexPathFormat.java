@@ -1,6 +1,5 @@
 package br.hm.thoughtworks.trains.core.graph;
 
-import java.nio.charset.Charset;
 import java.text.FieldPosition;
 import java.text.Format;
 import java.text.ParsePosition;
@@ -14,16 +13,15 @@ import java.util.regex.Pattern;
  */
 public class VertexPathFormat  extends Format{
 
-    private static final Pattern DEFAULT_VERTEX_PATTERN = Pattern.compile("\\A[A-Za-z]{1}\\z");
+    private static final Pattern DEFAULT_VERTEX_PATTERN = Pattern.compile("\\A[A-Za-z]\\z");
 
     /**
      * Formata o objeto {@link VertexPath} em uma String;
      * @param vertexPath um instancia de VertexPath
      * @param toAppendTo Onde o texto deve ser adiconado
-     * @param pos Identifica um campo no texto formatado
      * @return A mesma instancia de {@code toAppendTo} com o texto adicionado
      */
-    public StringBuffer format(VertexPath vertexPath, StringBuffer toAppendTo, FieldPosition pos){
+    private StringBuffer format(VertexPath vertexPath, StringBuffer toAppendTo){
         vertexPath.path().forEach(vertex ->{
                 if (toAppendTo.length() != 0) {
                     toAppendTo.append('-');
@@ -44,7 +42,7 @@ public class VertexPathFormat  extends Format{
     @Override
     public StringBuffer format(Object obj, StringBuffer toAppendTo, FieldPosition pos) {
         if (obj instanceof VertexPath)
-            return format((VertexPath) obj, toAppendTo, pos);
+            return format((VertexPath) obj, toAppendTo);
         else
             throw new IllegalArgumentException("Cannot format give Object as a VertexPath");
     }

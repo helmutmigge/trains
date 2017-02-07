@@ -7,6 +7,8 @@ import java.util.Queue;
 import java.util.stream.Collectors;
 
 /**
+ * Representa uma solução que soma todos os peso de um @{@link VertexPath} em um digrafo
+ * {@link EdgeWeightedDigraph}
  * Created by helmutmigge on 05/02/2017.
  */
 public class WeightedPaths {
