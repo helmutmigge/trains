@@ -67,8 +67,8 @@ public class DirectedEdge implements Comparable<DirectedEdge> {
      * Verifica que (@code o) é igual e essa aresta. true se {@code getWeight}
      * ,{@code to},{@code from} deve forem igual
      *
-     * @param o
-     * @return
+     * @param o uma classe {@link DirectedEdge}
+     * @return true caso esse instancia e {@code o} sejam iguais
      */
     @Override
     public boolean equals(Object o) {
@@ -77,9 +77,7 @@ public class DirectedEdge implements Comparable<DirectedEdge> {
 
         DirectedEdge directedEdge = (DirectedEdge) o;
 
-        if (getWeight() != directedEdge.getWeight()) return false;
-        if (!from.equals(directedEdge.from)) return false;
-        return to.equals(directedEdge.to);
+        return getWeight() == directedEdge.getWeight() && from.equals(directedEdge.from) && to.equals(directedEdge.to);
     }
 
     @Override

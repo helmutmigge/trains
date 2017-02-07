@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  */
 public class DirectedEdgeFormat extends Format {
 
-    private static final Pattern DEFAULT_PATTERN = Pattern.compile("([a-zA-Z]{1})([a-zA-Z]{1})(\\d)");
+    private static final Pattern DEFAULT_PATTERN = Pattern.compile("([a-zA-Z])([a-zA-Z])(\\d)");
 
     /**
      * Formata o objeto DirectedEdge em uma String;
@@ -26,7 +26,7 @@ public class DirectedEdgeFormat extends Format {
     @Override
     public StringBuffer format(Object obj, StringBuffer toAppendTo, FieldPosition pos) {
         if (obj instanceof DirectedEdge)
-            return format((DirectedEdge) obj, toAppendTo, pos);
+            return format((DirectedEdge) obj, toAppendTo);
         else
             throw new IllegalArgumentException("Cannot format give Object as a DirectedEdge");
 
@@ -36,11 +36,9 @@ public class DirectedEdgeFormat extends Format {
      * Formata o objeto DirectedEdge em uma String;
      * @param directedEdge um instancia de DirectedEdge
      * @param toAppendTo Onde o texto deve ser adiconado
-     * @param fieldPosition Identifica um campo no texto formatado
      * @return A mesma instancia de {@code toAppendTo} com o texto adicionado
      */
-    public StringBuffer format(DirectedEdge directedEdge, StringBuffer toAppendTo,
-                               FieldPosition fieldPosition) {
+    private StringBuffer format(DirectedEdge directedEdge, StringBuffer toAppendTo) {
         Vertex from = directedEdge.from();
         Vertex to = directedEdge.to();
         long weight = directedEdge.getWeight();

@@ -1,7 +1,6 @@
 package br.hm.thoughtworks.trains.core;
 
 import java.io.*;
-import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -27,24 +26,6 @@ public final class In implements Closeable {
      */
     public In(){
         this.scanner = new Scanner(new BufferedInputStream(System.in),Charset.defaultCharset().name());
-    }
-
-    /**
-     * Inicializado com o arquivo.
-     *
-     * @param  file arquivo
-     * @throws IllegalArgumentException Se não poder abrir o {@code file}
-     * @throws IllegalArgumentException Se {@code file} for {@code null}
-     */
-    public In(File file) {
-        if (file == null) throw new IllegalArgumentException("file argument is null");
-        try {
-            FileInputStream fis = new FileInputStream(file);
-            scanner = new Scanner(new BufferedInputStream(fis), Charset.defaultCharset().name());
-        }
-        catch (IOException ioe) {
-            throw new IllegalArgumentException("Could not open " + file, ioe);
-        }
     }
 
     /**

@@ -5,6 +5,7 @@ import br.hm.thoughtworks.trains.core.In;
 import br.hm.thoughtworks.trains.core.graph.DirectedEdge;
 import br.hm.thoughtworks.trains.core.graph.EdgeWeightedDigraph;
 
+import java.io.IOException;
 import java.text.ParseException;
 
 /**
@@ -18,16 +19,19 @@ public class Main {
             new Console(digraph).run();
         } catch (ParseException e) {
             System.err.print("corrupt data in input.txt");
+        } catch (IOException e) {
+            System.err.print("fail close input.txt");
         }
     }
 
-    public static EdgeWeightedDigraph loaddata() throws ParseException {
+    public static EdgeWeightedDigraph loaddata() throws ParseException, IOException {
         EdgeWeightedDigraph digraph = new EdgeWeightedDigraph();
-        In in = new In("input.txt");
-        String[] inputEdges = in.readAll().split(",");
-        for (String inputEdge : inputEdges) {
-            DirectedEdge directedEdge = DirectedEdge.parser(inputEdge.trim());
-            digraph.addEdge(directedEdge);
+        try (In in = new In("input.txt")) {
+            String[] inputEdges = in.readAll().split(",");
+            for (String inputEdge : inputEdges) {
+                DirectedEdge directedEdge = DirectedEdge.parser(inputEdge.trim());
+                digraph.addEdge(directedEdge);
+            }
         }
         return digraph;
     }

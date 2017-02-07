@@ -12,9 +12,10 @@ public class Dijkstra {
 
     private Map<Vertex, Long> distTo = new HashMap<>();
     private Map<Vertex, DirectedEdge> edgeTo = new HashMap<>();
-    private PriorityQueue<VertexWeighted> priorityQueue = new PriorityQueue();
+    private PriorityQueue<VertexWeighted> priorityQueue = new PriorityQueue<>();
     private Vertex source;
     private EdgeWeightedDigraph digraph;
+
     /**
      * Inicia com o digrafo a ser pesquisado e o vertice de origem
      *
@@ -32,16 +33,14 @@ public class Dijkstra {
                 }
         );
         this.source = source;
-        this.digraph=digraph;
+        this.digraph = digraph;
         setDistTo(source, 0);
 
         priorityQueue.add(new VertexWeighted(source, 0));
         while (!priorityQueue.isEmpty()) {
             VertexWeighted vertexWeighted = priorityQueue.poll();
             digraph.adjacencyForVertex(vertexWeighted).forEach(
-                    directedEdge -> {
-                        relax(directedEdge);
-                    }
+                    this::relax
             );
         }
 
@@ -68,7 +67,6 @@ public class Dijkstra {
      * @param vertex the destination vertex
      * @return o tamanho do caminho mais curto  entre {@code from} e {@code vertex}
      * {@code Long.MAX_VALUE}  Se não encontrar um caminho;
-     * @throws IllegalArgumentException unless {@code 0 <= v < V}
      */
 
     public long getDistTo(Vertex vertex) {
@@ -83,32 +81,50 @@ public class Dijkstra {
         this.distTo.put(vertex, dist);
     }
 
-
+    /**
+     * true caso extista um caminho entre {@code source} e {@code  vertex}
+     * @param vertex vertice que desejasse verificar
+     * @return true caso extista um caminho entre {@code source} e {@code  vertex}
+     */
     public boolean hasPathTo(Vertex vertex) {
         return getDistTo(vertex) < Long.MAX_VALUE;
     }
 
-
-
+    /**
+     * Retorna o menos caminho entre o {@code source} e o {@code vertex}
+     * @param vertex vertice que desejasse verificar
+     * @return true caso extista um caminho entre {@code source} e {@code  vertex}
+     */
     public long weightedPathTo(Vertex vertex) throws NoSuchElementException {
 
         if (!hasPathTo(vertex))
             throw new NoSuchElementException("not found vertex in path");
 
-        if (vertex.equals(source)){
+        long result = 0;
+        if (vertex.equals(source)) {
 
-            return digraph.adjacencyForVertex(source)
+            result = digraph.adjacencyForVertex(source)
                     .mapToLong(directedEdge ->
-                         new Dijkstra(digraph,directedEdge.to()).weightedPathTo(directedEdge.from()) + directedEdge.getWeight()
-                    ).min().getAsLong();
+                            {
+                                long w;
+                                try {
+                                    w = new Dijkstra(digraph, directedEdge.to()).weightedPathTo(directedEdge.from()) + directedEdge.getWeight();
+                                } catch (NoSuchElementException e) {
+                                    w = Long.MAX_VALUE;
+                                }
+                                return w;
+                            }
+                    ).min().orElse(Long.MAX_VALUE);
+            if (result == Long.MAX_VALUE) {
+                throw new NoSuchElementException("not found vertex in path");
+            }
 
-        }else {
-            long result = 0;
+        } else {
             for (DirectedEdge e = edgeTo.get(vertex); e != null; e = edgeTo.get(e.from())) {
                 result += e.getWeight();
             }
-            return result;
         }
+        return result;
     }
 
     /**
