@@ -20,7 +20,7 @@ public class Digraphs {
      */
     public static long weightedPath(EdgeWeightedDigraph digraph, String path) throws ParseException, NoSuchElementException {
         VertexPath vertexPath = VertexPath.parseVertexPath(path);
-        return new WeightedPaths(digraph, vertexPath).weight();
+        return new WeightedVertexPaths(digraph, vertexPath).weight();
     }
 
     /**
@@ -31,7 +31,7 @@ public class Digraphs {
      * @throws NoSuchElementException Caso o path informado não exista no digrafo {@code digraph}
      */
     public static long weightedPath(EdgeWeightedDigraph digraph,VertexPath vertexPath) throws  NoSuchElementException {
-        return new WeightedPaths(digraph, vertexPath).weight();
+        return new WeightedVertexPaths(digraph, vertexPath).weight();
     }
 
     /**
@@ -45,5 +45,16 @@ public class Digraphs {
      */
     public static long weightedShortestPath(EdgeWeightedDigraph digraph, Vertex from, Vertex to) throws NoSuchElementException{
         return new Dijkstra(digraph,from).weightedPathTo(to);
+    }
+
+
+    /**
+     * Retorna a quantidade de ocorrencia que atendam ao criterio {@code criteriaDegree} no digrafo {@code digraph}
+     * @param digraph a se presquisado
+     * @param criteriaDegree criteria para pesquisa {@link CriteriaDegree}
+     * @return a quantidade de ocorrencia que atendam ao criterio {@code criteriaDegree} no digrafo {@code digraph}.
+     */
+    public static long countDegree(EdgeWeightedDigraph digraph, CriteriaDegree criteriaDegree){
+        return new DepthCountDegree(digraph,criteriaDegree).getCount();
     }
 }

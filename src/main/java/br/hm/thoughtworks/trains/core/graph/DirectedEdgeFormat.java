@@ -8,12 +8,12 @@ import java.util.regex.Pattern;
 
 /**
  * Formata objetos DirectedEdge em String. Tambem é possivel transformar String no formato padrão para um objeto DirectedEdge
- * O formato padrão da string deve seguir a expressão [A-D-a-d]{1}[A-D-a-d]{1}\d
+ * O formato padrão da string deve seguir a expressão [A-Z-a-z][A-Z-a-z]\d
  * Created by helmutmigge on 04/02/2017.
  */
 public class DirectedEdgeFormat extends Format {
 
-    private static final Pattern DEFAULT_PATTERN = Pattern.compile("([a-zA-Z])([a-zA-Z])(\\d)");
+    private static final Pattern DEFAULT_PATTERN = Pattern.compile("\\A([a-zA-Z])([a-zA-Z])(\\d)+\\z");
 
     /**
      * Formata o objeto DirectedEdge em uma String;

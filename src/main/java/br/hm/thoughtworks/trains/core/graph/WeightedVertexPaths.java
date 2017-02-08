@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
  * {@link EdgeWeightedDigraph}
  * Created by helmutmigge on 05/02/2017.
  */
-public class WeightedPaths {
+public class WeightedVertexPaths {
 
     private long weight;
 
-    public WeightedPaths(EdgeWeightedDigraph digraph, VertexPath vertexPath) {
+    public WeightedVertexPaths(EdgeWeightedDigraph digraph, VertexPath vertexPath) {
         dfs(digraph, vertexPath);
     }
 

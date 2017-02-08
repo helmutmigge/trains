@@ -9,12 +9,10 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.NoSuchElementException;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by helmutmigge on 06/02/2017.
  */
-public class WeightedPathsTest {
+public class WeightedVertexPathsTest {
 
     private EdgeWeightedDigraph graph;
 
@@ -32,12 +30,12 @@ public class WeightedPathsTest {
 
     @Test(expected = NoSuchElementException.class)
     public void weightNotExistePath() throws Exception {
-        new WeightedPaths(graph,VertexPath.parseVertexPath("E-A")).weight();
+        new WeightedVertexPaths(graph,VertexPath.parseVertexPath("E-A")).weight();
     }
 
     @Test
     public void weightAEB() throws Exception {
-        Assert.assertEquals(10,new WeightedPaths(graph,VertexPath.parseVertexPath("A-E-B")).weight());
+        Assert.assertEquals(10,new WeightedVertexPaths(graph,VertexPath.parseVertexPath("A-E-B")).weight());
     }
 
 

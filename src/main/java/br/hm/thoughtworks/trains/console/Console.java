@@ -21,9 +21,9 @@ public class Console {
     public Console(EdgeWeightedDigraph digraph) {
         this.digraph = digraph;
         commandHandlers.add(new ExitCommandHandler());
+        commandHandlers.add(new CountTripsCommandHandler(digraph));
         commandHandlers.add(new DistanceRouteCommandHandler(digraph));
         commandHandlers.add(new ShortestRouteCommandHandler(digraph));
-
     }
 
 
@@ -69,6 +69,9 @@ public class Console {
         System.out.println("menu press:");
         System.out.println("\t distance of the route (Ex:A-B-C)");
         System.out.println("\t shortest route (Ex:A->B)");
+        System.out.println("\t number of trips with a maximum of {3} stops (Ex:C->C<=3)");
+        System.out.println("\t Number of trips with the exact {4} stops (Ex:A->C=4)");
+
         System.out.println("\t Blanck line for exit");
         System.out.println("-----------------------------------------------");
     }
