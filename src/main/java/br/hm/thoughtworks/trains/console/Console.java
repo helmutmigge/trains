@@ -24,6 +24,7 @@ public class Console {
         commandHandlers.add(new CountTripsCommandHandler(digraph));
         commandHandlers.add(new DistanceRouteCommandHandler(digraph));
         commandHandlers.add(new ShortestRouteCommandHandler(digraph));
+        commandHandlers.add(new FailCommandHandler());
     }
 
 
@@ -53,8 +54,8 @@ public class Console {
                             System.out.println("Result:" + result + "\n");
                         } else {
                             exit =true;
-                            break;
                         }
+                        break;
                     }
                 }
             } catch (ParseException e) {
